@@ -3,5 +3,5 @@ set -e
 cd /src
 mkdir -p build
 cd build
-cmake -GNinja ..
+cmake -GNinja .. "$@"
 cmake --build .
