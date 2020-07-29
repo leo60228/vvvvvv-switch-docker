@@ -5,6 +5,7 @@ cmake_policy(VERSION 3.18.0)
 set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/switch-cmake/DevkitA64Libnx.cmake)
 include(${CMAKE_TOOLCHAIN_FILE})
 project(VVVVVV-Switch)
+option(MAKEANDPLAY "Disable the main game" OFF)
 find_package(PkgConfig)
 pkg_check_modules(SDL2 REQUIRED sdl2 SDL2_mixer)
 set(SDL2_LIBRARIES ${SDL2_STATIC_LDFLAGS})
@@ -14,6 +15,11 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/switch-cmake/cmake)
 
 # Build
 add_subdirectory(VVVVVV/desktop_version)
+
+# Target options
+if(MAKEANDPLAY)
+    target_compile_definitions(VVVVVV PRIVATE -DMAKEANDPLAY=1)
+endif()
 
 # PhysFS
 set_property(TARGET physfs-static PROPERTY SOURCES
