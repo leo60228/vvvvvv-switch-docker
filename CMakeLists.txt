@@ -10,15 +10,13 @@ find_package(PkgConfig)
 pkg_check_modules(SDL2 REQUIRED sdl2 SDL2_mixer)
 set(SDL2_LIBRARIES ${SDL2_STATIC_LDFLAGS})
 set(ENABLE_SAVE_MIGRATION OFF)
+add_definitions(-D__unix__)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/switch-cmake/cmake)
 
 # Build
 add_subdirectory(VVVVVV/desktop_version)
 
 # Target options
-# FIXME: https://github.com/TerryCavanagh/VVVVVV/pull/410
-#target_compile_definitions(VVVVVV PRIVATE -D__unix__)
-set_property(SOURCE VVVVVV/desktop_version/src/FileSystemUtils.cpp DIRECTORY VVVVVV/desktop_version PROPERTY COMPILE_FLAGS "-include unistd.h -include dirent.h -include limits.h -include sys/stat.h -include sys/types.h -include sys/wait.h -DMAX_PATH=PATH_MAX")
 if(MAKEANDPLAY)
     target_compile_definitions(VVVVVV PRIVATE -DMAKEANDPLAY=1)
 endif()
