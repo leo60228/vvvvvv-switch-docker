@@ -4,3 +4,6 @@
 [submodule "VVVVVV"]
 	path = VVVVVV
 	url = https://github.com/TerryCavanagh/VVVVVV
+[submodule "physfs-switch"]
+	path = physfs-switch
+	url = https://github.com/carstene1ns/physfs-switch.git
