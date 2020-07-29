@@ -9,3 +9,6 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v3.18.0/cmake-3.18.0
       && rm /tmp/cmake-install.sh
 
 RUN apt-get update && apt-get install -y ninja-build zip && rm -rf /var/lib/apt/lists/*
+
+COPY container_build.sh /container_build.sh
+CMD /container_build.sh
