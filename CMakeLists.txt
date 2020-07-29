@@ -49,4 +49,12 @@ target_link_libraries(physfs-static switch::libnx)
 
 # Package
 include(SwitchTools)
+set_target_properties(VVVVVV PROPERTIES
+    APP_TITLE "VVVVVV"
+    APP_AUTHOR "Terry Cavanagh"
+    APP_VERSION "2.3"
+    ICON "${CMAKE_CURRENT_SOURCE_DIR}/VVVVVV.jpg")
+if(MAKEANDPLAY)
+    set_property(TARGET VVVVVV PROPERTY APP_TITLE "VVVVVV: Make and Play Edition")
+endif()
 add_nro_target(VVVVVV)
