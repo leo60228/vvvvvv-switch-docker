@@ -9,7 +9,6 @@ option(MAKEANDPLAY "Disable the main game" OFF)
 find_package(PkgConfig)
 pkg_check_modules(SDL2 REQUIRED sdl2 SDL2_mixer)
 set(SDL2_LIBRARIES ${SDL2_STATIC_LDFLAGS})
-set(ENABLE_SAVE_MIGRATION OFF)
 add_definitions(-D__unix__)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/switch-cmake/cmake)
 
@@ -44,6 +43,7 @@ set_property(TARGET physfs-static PROPERTY SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/physfs-switch/src/physfs_archiver_iso9660.c
     ${CMAKE_CURRENT_SOURCE_DIR}/physfs-switch/src/physfs_archiver_vdf.c
 )
+set_property(TARGET physfs-static PROPERTY C_STANDARD 99)
 find_package(Libnx)
 target_link_libraries(physfs-static switch::libnx)
 

@@ -3,8 +3,7 @@
 	url = https://github.com/vbe0201/switch-cmake
 [submodule "VVVVVV"]
 	path = VVVVVV
-	url = https://github.com/leo60228/VVVVVV
-	branch = fs-portability
+	url = https://github.com/TerryCavanagh/VVVVVV.git
 [submodule "physfs-switch"]
 	path = physfs-switch
 	url = https://github.com/carstene1ns/physfs-switch.git

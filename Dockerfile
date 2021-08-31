@@ -1,5 +1,5 @@
 # vi: set ft=dockerfile:
-FROM devkitpro/devkita64:20200528
+FROM devkitpro/devkita64:20210726
 
 RUN wget https://github.com/Kitware/CMake/releases/download/v3.18.0/cmake-3.18.0-Linux-x86_64.sh \
       -q -O /tmp/cmake-install.sh \
