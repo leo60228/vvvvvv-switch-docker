@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.18.0)
 cmake_policy(VERSION 3.18.0)
 
 # Options
-set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/switch-cmake/DevkitA64Libnx.cmake)
+set(CMAKE_TOOLCHAIN_FILE /opt/devkitpro/cmake/Switch.cmake)
 include(${CMAKE_TOOLCHAIN_FILE})
 project(VVVVVV-Switch)
 option(MAKEANDPLAY "Disable the main game" OFF)
@@ -10,7 +10,6 @@ find_package(PkgConfig)
 pkg_check_modules(SDL2 REQUIRED sdl2 SDL2_mixer)
 set(SDL2_LIBRARIES ${SDL2_STATIC_LDFLAGS})
 add_definitions(-D__unix__)
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/switch-cmake/cmake)
 
 # Build
 add_subdirectory(VVVVVV/desktop_version)
@@ -44,17 +43,12 @@ set_property(TARGET physfs-static PROPERTY SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/physfs-switch/src/physfs_archiver_vdf.c
 )
 set_property(TARGET physfs-static PROPERTY C_STANDARD 99)
-find_package(Libnx)
-target_link_libraries(physfs-static switch::libnx)
 
 # Package
-include(SwitchTools)
-set_target_properties(VVVVVV PROPERTIES
-    APP_TITLE "VVVVVV"
-    APP_AUTHOR "Terry Cavanagh"
-    APP_VERSION "2.3"
-    ICON "${CMAKE_CURRENT_SOURCE_DIR}/VVVVVV.jpg")
 if(MAKEANDPLAY)
-    set_property(TARGET VVVVVV PROPERTY APP_TITLE "VVVVVV: Make and Play Edition")
+    set(APP_TITLE "VVVVVV: Make and Play Edition")
+else()
+    set(APP_TITLE "VVVVVV")
 endif()
-add_nro_target(VVVVVV)
+nx_generate_nacp(VVVVVV.nacp NAME ${APP_TITLE} AUTHOR "Terry Cavanagh" VERSION "2.3")
+nx_create_nro(VVVVVV ICON "${CMAKE_CURRENT_SOURCE_DIR}/VVVVVV.jpg" NACP VVVVVV.nacp)

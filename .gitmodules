@@ -1,6 +1,3 @@
-[submodule "switch-cmake"]
-	path = switch-cmake
-	url = https://github.com/vbe0201/switch-cmake
 [submodule "VVVVVV"]
 	path = VVVVVV
 	url = https://github.com/TerryCavanagh/VVVVVV.git
